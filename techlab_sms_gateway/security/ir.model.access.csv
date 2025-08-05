@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sms_gateway_admin,sms.gateway admin,model_sms_gateway,base.group_system,1,1,1,1
+access_sms_gateway_user,sms.gateway user,model_sms_gateway,base.group_user,1,0,0,0
+access_sms_gateway_log_admin,sms.gateway.log admin,model_sms_gateway_log,base.group_system,1,1,1,1
+access_sms_gateway_log_user,sms.gateway.log user,model_sms_gateway_log,base.group_user,1,0,0,0
+access_sms_template_admin,sms.template admin,model_sms_template,base.group_system,1,1,1,1
+access_sms_template_user,sms.template user,model_sms_template,base.group_user,1,0,0,0
+access_sms_test_wizard,sms.test.wizard,model_sms_test_wizard,base.group_user,1,1,1,1
+access_send_sms_wizard,send.sms.wizard,model_send_sms_wizard,base.group_user,1,1,1,1

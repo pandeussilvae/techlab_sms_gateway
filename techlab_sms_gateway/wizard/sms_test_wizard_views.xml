@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SMS Test Wizard Form View -->
+    <record id="view_sms_test_wizard_form" model="ir.ui.view">
+        <field name="name">sms.test.wizard.form</field>
+        <field name="model">sms.test.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Test SMS">
+                <group>
+                    <field name="gateway_id"/>
+                    <field name="phone_number"/>
+                </group>
+                <group string="Message">
+                    <field name="message" nolabel="1"/>
+                </group>
+                <footer>
+                    <button name="action_send_test_sms" type="object" string="Send Test SMS" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- SMS Test Wizard Action -->
+    <record id="action_sms_test_wizard" model="ir.actions.act_window">
+        <field name="name">Test SMS</field>
+        <field name="res_model">sms.test.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_sms_test_wizard_form"/>
+    </record>
+</odoo>

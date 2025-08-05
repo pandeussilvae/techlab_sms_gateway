@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Send SMS Wizard Form View -->
+    <record id="view_send_sms_wizard_form" model="ir.ui.view">
+        <field name="name">send.sms.wizard.form</field>
+        <field name="model">send.sms.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Send SMS">
+                <group>
+                    <group>
+                        <field name="gateway_id"/>
+                        <field name="template_id" domain="[('model_name', '=', res_model)]"/>
+                    </group>
+                    <group>
+                        <field name="phone_number"/>
+                        <field name="partner_name" readonly="1" attrs="{'invisible': [('partner_name', '=', False)]}"/>
+                    </group>
+                </group>
+                <group string="Message">
+                    <field name="message" nolabel="1"/>
+                </group>
+                <group attrs="{'invisible': True}">
+                    <field name="res_model"/>
+                    <field name="res_id"/>
+                </group>
+                <footer>
+                    <button name="action_send_sms" type="object" string="Send SMS" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Send SMS Wizard Action -->
+    <record id="action_send_sms_wizard" model="ir.actions.act_window">
+        <field name="name">Send SMS</field>
+        <field name="res_model">send.sms.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_send_sms_wizard_form"/>
+    </record>
+</odoo>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SMS Gateway Log Tree View -->
+    <record id="view_sms_gateway_log_tree" model="ir.ui.view">
+        <field name="name">sms.gateway.log.tree</field>
+        <field name="model">sms.gateway.log</field>
+        <field name="arch" type="xml">
+            <tree string="SMS Logs" create="false">
+                <field name="timestamp"/>
+                <field name="gateway_id"/>
+                <field name="phone_number"/>
+                <field name="message"/>
+                <field name="status" decoration-success="status == 'success'" decoration-danger="status == 'error'"/>
+                <field name="response_code"/>
+                <field name="res_model"/>
+                <field name="res_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- SMS Gateway Log Form View -->
+    <record id="view_sms_gateway_log_form" model="ir.ui.view">
+        <field name="name">sms.gateway.log.form</field>
+        <field name="model">sms.gateway.log</field>
+        <field name="arch" type="xml">
+            <form string="SMS Log" create="false" edit="false">
+                <header>
+                    <button name="action_view_related_record" type="object" string="View Related Record" 
+                            attrs="{'invisible': [('res_model', '=', False)]}" class="btn-secondary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="timestamp"/>
+                            <field name="gateway_id"/>
+                            <field name="phone_number"/>
+                            <field name="status"/>
+                        </group>
+                        <group>
+                            <field name="response_code"/>
+                            <field name="res_model"/>
+                            <field name="res_id"/>
+                            <field name="record_ref" attrs="{'invisible': [('res_model', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <group string="Message">
+                        <field name="message" nolabel="1"/>
+                    </group>
+                    <group string="Response">
+                        <field name="response_body" widget="ace" options="{'mode': 'text'}" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- SMS Gateway Log Search View -->
+    <record id="view_sms_gateway_log_search" model="ir.ui.view">
+        <field name="name">sms.gateway.log.search</field>
+        <field name="model">sms.gateway.log</field>
+        <field name="arch" type="xml">
+            <search string="SMS Logs">
+                <field name="gateway_id"/>
+                <field name="phone_number"/>
+                <field name="message"/>
+                <field name="res_model"/>
+                <filter string="Success" name="success" domain="[('status', '=', 'success')]"/>
+                <filter string="Error" name="error" domain="[('status', '=', 'error')]"/>
+                <filter string="Today" name="today" domain="[('timestamp', '&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"/>
+                <filter string="This Week" name="this_week" domain="[('timestamp', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Gateway" name="group_gateway" domain="[]" context="{'group_by': 'gateway_id'}"/>
+                    <filter string="Status" name="group_status" domain="[]" context="{'group_by': 'status'}"/>
+                    <filter string="Date" name="group_date" domain="[]" context="{'group_by': 'timestamp:day'}"/>
+                    <filter string="Model" name="group_model" domain="[]" context="{'group_by': 'res_model'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- SMS Gateway Log Action -->
+    <record id="action_sms_gateway_log" model="ir.actions.act_window">
+        <field name="name">SMS Logs</field>
+        <field name="res_model">sms.gateway.log</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_sms_gateway_log_search"/>
+        <field name="context">{'search_default_today': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No SMS logs yet
+            </p>
+            <p>
+                SMS logs will appear here after sending messages through the configured gateways.
+                You can track the status and responses of all sent messages.
+            </p>
+        </field>
+    </record>
+</odoo>

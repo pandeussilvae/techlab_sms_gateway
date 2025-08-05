@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SMS Gateway Tree View -->
+    <record id="view_sms_gateway_tree" model="ir.ui.view">
+        <field name="name">sms.gateway.tree</field>
+        <field name="model">sms.gateway</field>
+        <field name="arch" type="xml">
+            <tree string="SMS Gateways">
+                <field name="name"/>
+                <field name="url"/>
+                <field name="method"/>
+                <field name="active"/>
+                <field name="is_default"/>
+                <field name="log_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- SMS Gateway Form View -->
+    <record id="view_sms_gateway_form" model="ir.ui.view">
+        <field name="name">sms.gateway.form</field>
+        <field name="model">sms.gateway</field>
+        <field name="arch" type="xml">
+            <form string="SMS Gateway">
+                <header>
+                    <button name="action_test_sms" type="object" string="Test SMS" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_logs" type="object" class="oe_stat_button" icon="fa-list">
+                            <field name="log_count" widget="statinfo" string="Logs"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="active"/>
+                            <field name="is_default"/>
+                        </group>
+                        <group>
+                            <field name="url"/>
+                            <field name="method"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Configuration" name="configuration">
+                            <group>
+                                <group string="Parameters">
+                                    <field name="message_param"/>
+                                    <field name="recipient_param"/>
+                                    <field name="api_key_param"/>
+                                    <field name="api_key_value" password="True"/>
+                                </group>
+                                <group string="Request Configuration">
+                                    <field name="headers" widget="ace" options="{'mode': 'json'}"/>
+                                    <field name="params_template" widget="ace" options="{'mode': 'json'}"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- SMS Gateway Search View -->
+    <record id="view_sms_gateway_search" model="ir.ui.view">
+        <field name="name">sms.gateway.search</field>
+        <field name="model">sms.gateway</field>
+        <field name="arch" type="xml">
+            <search string="SMS Gateways">
+                <field name="name"/>
+                <field name="url"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                <filter string="Default Gateway" name="default" domain="[('is_default', '=', True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Method" name="group_method" domain="[]" context="{'group_by': 'method'}"/>
+                    <filter string="Active" name="group_active" domain="[]" context="{'group_by': 'active'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- SMS Gateway Action -->
+    <record id="action_sms_gateway" model="ir.actions.act_window">
+        <field name="name">SMS Gateways</field>
+        <field name="res_model">sms.gateway</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_sms_gateway_search"/>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first SMS Gateway
+            </p>
+            <p>
+                Configure SMS gateways to send SMS messages through external APIs.
+                You can set up multiple gateways and choose which one to use for each message.
+            </p>
+        </field>
+    </record>
+</odoo>
