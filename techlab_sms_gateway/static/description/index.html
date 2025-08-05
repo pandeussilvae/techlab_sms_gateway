@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TechLab SMS Gateway</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .features { margin: 20px 0; }
+        .feature { margin: 10px 0; padding: 10px; background: #f8f9fa; border-left: 4px solid #007bff; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>TechLab SMS Gateway</h1>
+        <p>Generic SMS Gateway integration with queue_job support for Odoo 18 CE</p>
+    </div>
+
+    <div class="features">
+        <h2>Features</h2>
+        
+        <div class="feature">
+            <strong>Multiple SMS Gateways</strong><br>
+            Configure multiple SMS gateways with different APIs and choose which one to use.
+        </div>
+        
+        <div class="feature">
+            <strong>Asynchronous Processing</strong><br>
+            Uses queue_job for reliable, asynchronous SMS sending with proper error handling.
+        </div>
+        
+        <div class="feature">
+            <strong>SMS Templates</strong><br>
+            Create reusable SMS templates with dynamic content using placeholders.
+        </div>
+        
+        <div class="feature">
+            <strong>Complete Logging</strong><br>
+            Track all sent messages with detailed logs including responses and errors.
+        </div>
+        
+        <div class="feature">
+            <strong>CRM Integration</strong><br>
+            Send SMS directly from Partner and Lead records with automatic chatter logging.
+        </div>
+        
+        <div class="feature">
+            <strong>Test Tools</strong><br>
+            Built-in test wizard to verify gateway configurations before going live.
+        </div>
+    </div>
+
+    <div class="features">
+        <h2>Usage</h2>
+        <ol>
+            <li>Configure your SMS gateways in the SMS → Gateway SMS menu</li>
+            <li>Create SMS templates in SMS → Template SMS menu</li>
+            <li>Send SMS from Partner or Lead records using the "Send SMS" button</li>
+            <li>Monitor sent messages in SMS → Log SMS menu</li>
+        </ol>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SMS Template Tree View -->
+    <record id="view_sms_template_tree" model="ir.ui.view">
+        <field name="name">sms.template.tree</field>
+        <field name="model">sms.template</field>
+        <field name="arch" type="xml">
+            <tree string="SMS Templates">
+                <field name="name"/>
+                <field name="model_id"/>
+                <field name="gateway_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- SMS Template Form View -->
+    <record id="view_sms_template_form" model="ir.ui.view">
+        <field name="name">sms.template.form</field>
+        <field name="model">sms.template</field>
+        <field name="arch" type="xml">
+            <form string="SMS Template">
+                <header>
+                    <button name="action_test_render" type="object" string="Test Render" class="btn-secondary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="model_id"/>
+                            <field name="gateway_id"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Message Template">
+                        <field name="body" widget="ace" options="{'mode': 'text'}" nolabel="1"/>
+                        <div class="alert alert-info" role="alert">
+                            <strong>Template Placeholders:</strong><br/>
+                            Use ${object.field_name} to insert values from the record.<br/>
+                            Examples: ${object.name}, ${object.phone}, ${object.email}
+                        </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- SMS Template Search View -->
+    <record id="view_sms_template_search" model="ir.ui.view">
+        <field name="name">sms.template.search</field>
+        <field name="model">sms.template</field>
+        <field name="arch" type="xml">
+            <search string="SMS Templates">
+                <field name="name"/>
+                <field name="model_id"/>
+                <field name="gateway_id"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Model" name="group_model" domain="[]" context="{'group_by': 'model_id'}"/>
+                    <filter string="Gateway" name="group_gateway" domain="[]" context="{'group_by': 'gateway_id'}"/>
+                    <filter string="Active" name="group_active" domain="[]" context="{'group_by': 'active'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- SMS Template Action -->
+    <record id="action_sms_template" model="ir.actions.act_window">
+        <field name="name">SMS Templates</field>
+        <field name="res_model">sms.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_sms_template_search"/>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first SMS Template
+            </p>
+            <p>
+                Create reusable SMS templates with dynamic content.
+                Use placeholders like ${object.name} to insert values from records.
+            </p>
+        </field>
+    </record>
+</odoo>

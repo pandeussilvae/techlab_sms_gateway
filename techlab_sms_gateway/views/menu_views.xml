@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main SMS Menu -->
+    <menuitem id="menu_sms_main" name="SMS" sequence="50" web_icon="techlab_sms_gateway,static/description/icon.png"/>
+
+    <!-- SMS Gateway Menu -->
+    <menuitem id="menu_sms_gateway" name="Gateway SMS" parent="menu_sms_main" sequence="10" action="action_sms_gateway"/>
+
+    <!-- SMS Template Menu -->
+    <menuitem id="menu_sms_template" name="Template SMS" parent="menu_sms_main" sequence="20" action="action_sms_template"/>
+
+    <!-- SMS Log Menu -->
+    <menuitem id="menu_sms_log" name="Log SMS" parent="menu_sms_main" sequence="30" action="action_sms_gateway_log"/>
+</odoo>
