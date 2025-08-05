@@ -1,0 +1,27 @@
+# TechLab SMS Gateway - Python Requirements
+# =======================================
+
+# Core HTTP library for SMS gateway API calls
+requests>=2.28.0
+
+# Odoo Framework (Community Edition)
+# Note: Install Odoo via package manager or from source
+# This is commented as it's typically installed system-wide
+# odoo>=18.0
+
+# Queue Job Dependencies (if not included with Odoo installation)
+# The queue_job module is an OCA addon that may require additional dependencies
+# These are typically handled by the Odoo addon itself, but listed for reference:
+
+# Development and Testing Dependencies (optional)
+# Uncomment these if you need them for development/testing
+# pytest>=7.0.0
+# pytest-odoo>=1.0.0
+# coverage>=6.0.0
+# flake8>=5.0.0
+# black>=22.0.0
+
+# Production Dependencies (optional)
+# Uncomment these if deploying to production
+# gunicorn>=20.0.0
+# psycopg2-binary>=2.9.0
